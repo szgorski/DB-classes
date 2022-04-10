@@ -1,0 +1,90 @@
+﻿@page
+@model WebSolution.Pages.Movies.IndexModel
+
+@{
+    ViewData["Title"] = "List of Movies";
+}
+
+<h1>List of Movies</h1>
+<p>
+    <h4>Filters</h4>
+</p>
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Title:<br />
+            <input type="text" name="titleValue" value="@Model.TitleFilter" />
+        </p>
+        <p>
+            Released from:<br />
+            <input type="date" name="fromValue" value="@Model.FromFilter" />
+        </p>
+        <p>
+            Released to:<br />
+            <input type="date" name="toValue" value="@Model.ToFilter" />
+        </p>
+        <p>
+            Minimum rating:<br />
+            <input type="text" name="ratingValue" value="@Model.RatingFilter" />
+        </p>
+        <p>
+            Genre:<br />
+            <input type="text" name="genreValue" value="@Model.GenreFilter" />
+        </p>
+        <p>
+            <input type="submit" value="Filter" class="btn btn-primary" />
+        </p>
+        <p>
+            <a asp-page="./Index">Back to full List of Movies</a>
+        </p>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MOVIES[0].MOVIE_TITLE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MOVIES[0].RELEASE_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MOVIES[0].PRICE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MOVIES[0].RATING)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MOVIES[0].GENRE)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.MOVIES) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MOVIE_TITLE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RELEASE_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRICE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RATING)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GENRE)
+            </td>
+            <td>
+                <a asp-page="../Orders/Create" asp-route-id="@item.MOVIE_ID">RENT</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

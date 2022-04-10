@@ -1,0 +1,64 @@
+﻿@page
+@model WebSolution.Pages.Orders.IndexModel
+
+@{
+    ViewData["Title"] = "List of Orders";
+}
+
+<h1>List of Orders</h1>
+<p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDERS[0].RENTAL_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDERS[0].RETURN_DATE)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDERS[0].NET_AMOUNT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDERS[0].DISCOUNT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDERS[0].GROSS_AMOUNT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ORDERS[0].MOVIES.MOVIE_TITLE)
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ORDERS) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RENTAL_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RETURN_DATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NET_AMOUNT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DISCOUNT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GROSS_AMOUNT)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MOVIES.MOVIE_TITLE)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ORDER_ID">UPDATE</a> •
+                <a asp-page="./Delete" asp-route-id="@item.ORDER_ID">DELETE</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
